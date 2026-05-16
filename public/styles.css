@@ -5,15 +5,14 @@
    the page will refresh on its own. Or ask
    GitHub Copilot Chat: "make this theme
    green and purple". */
-
 :root {
-  --bg:           #0a0a0a;   /* page background */
-  --surface:      #161616;   /* AI bubble + input box */
-  --border:       #2a2a2a;   /* subtle dividers */
-  --text:         #ededed;   /* main text */
-  --text-muted:   #8a8a8a;   /* subtitles, hints */
-  --accent:       #3b82f6;   /* user bubble + send button */
-  --accent-hover: #2563eb;
+  --bg:           white;   /* page background */
+  --surface:      #f5f5f5;   /* AI bubble + input box */
+  --border:       #ddd;   /* subtle dividers */
+  --text:         black;   /* main text */
+  --text-muted:   #777;   /* subtitles, hints */
+  --accent:       #333;   /* user bubble + send button */
+  --accent-hover: #000;
   --user-bubble:  var(--accent);
   --ai-bubble:    var(--surface);
 
@@ -36,7 +35,15 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
-  background: var(--bg);
+  background-color: #9ab8e5;
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(255,255,255,0.75), transparent 18%),
+    radial-gradient(circle at 80% 10%, rgba(255,255,255,0.55), transparent 16%),
+    linear-gradient(120deg, rgba(255,255,255,0.18) 0%, transparent 32%),
+    linear-gradient(70deg, rgba(255,255,255,0.12) 0%, transparent 25%),
+    linear-gradient(160deg, rgba(0,0,0,0.15) 0%, transparent 18%),
+    linear-gradient(10deg, rgba(0,0,0,0.08) 0%, transparent 14%);
+  background-size: cover;
   color: var(--text);
   font-family: var(--font);
   font-size: 16px;
@@ -47,7 +54,28 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
+  overflow: hidden;
+  min-height: 100%;
 }
+
+body::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle at 15% 15%, rgba(255,255,255,0.85), transparent 15%),
+    radial-gradient(circle at 80% 18%, rgba(255,255,255,0.6), transparent 12%),
+    linear-gradient(170deg, rgba(255,255,255,0.14) 0%, transparent 30%),
+    linear-gradient(25deg, rgba(255,255,255,0.1) 0%, transparent 18%),
+    repeating-linear-gradient(135deg, transparent 0, transparent 12px, rgba(255,255,255,0.14) 12px, rgba(255,255,255,0.14) 13px, transparent 13px, transparent 24px);
+  opacity: 0.55;
+  animation: crack-fade 10s ease-in-out infinite alternate, crack-move 20s linear infinite;
+  mix-blend-mode: screen;
+  transform: scale(1.02);
+}
+
 
 .app-header {
   width: 100%;
@@ -187,5 +215,26 @@ body {
 @keyframes cursor-blink {
   50% {
     opacity: 0;
+  }
+}
+
+@keyframes crack-fade {
+  0%, 100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+
+@keyframes crack-move {
+  0% {
+    transform: scale(1.01) translate(0, 0);
+  }
+  50% {
+    transform: scale(1.03) translate(-10px, 8px);
+  }
+  100% {
+    transform: scale(1.01) translate(0, 0);
   }
 }
